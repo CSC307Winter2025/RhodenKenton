@@ -10,7 +10,7 @@ export default function JobItem({ job }: JobItemProps) {
   return (
     <li key={job.id}>
       <span>
-        <Link href={`/job/${job.id}`}>{job.name}</Link>
+        <Link href={`/job/${job.id}?name=${encodeURIComponent(job.name)}&description=${encodeURIComponent(job.description)}`}>{job.name}</Link>
       </span>
       <span> {job.date}</span>
     </li>

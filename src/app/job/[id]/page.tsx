@@ -1,16 +1,22 @@
+'use client'
+
 import Link from 'next/link';
-import type { Job } from '../../page'
+import { useParams, useSearchParams } from 'next/navigation'
 
-interface JobProps {
-  params: Job;
-}
+export default function Job() {
 
-export default function Job({params}: JobProps) {
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const description = searchParams.get("description")
+  const name = searchParams.get("name")
+
   return (
-    <div>
-      This is more information about my job number: {params?.id}
+    <div className="center">
       <br/>
-      <p>Job description: {params.description}</p>
+      This is more information about job id: {params?.id}
+      <h2>{name}</h2>
+      Job description: {description}
+      <br/>
       <br/>
       <Link href="/">Home</Link>
     </div>

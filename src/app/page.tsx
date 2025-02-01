@@ -2,35 +2,32 @@
 
 import JobItem from '@/components/jobItem';
 import { useState } from 'react';
-import './globals.css'
+import Link from 'next/link';
 
 
 export interface Job {
   id: number;
   name: string;
   date: number;
-  description?: string;
+  description: string;
 }
 
 export default function Home() {
 
   const [jobList, setJobList] = useState<Job[]>([{
     id: 1,
-    name: "Raytheon",
-    date: 2004
+    name: "Summer Undergraduate Research Program",
+    date: 2024,
+    description: "Worked on resume generation and optimization for ATS systems"
   }, {
     id: 2,
-    name: "Revolution Prep",
-    date: 2007,
-    description: "test"
-  }, {
-    id: 3,
-    name: "Revolution Prep 2.0",
-    date: 2007,
-    description: "test"
+    name: "Senior Citizen Jigsaw Puzzle Game Assistant",
+    date: 2024,
+    description: "Collaborated with peers to delegate tasks, brainstorm ideas, create a Jigsaw game, and fix issues"
   }]);
 
-  let jobHtml = jobList.map((job) => <JobItem key={job.id} job={job}></JobItem>);
+  let sortedJobList = [...jobList].sort((a, b) => b.date - a.date);
+  let jobHtml = sortedJobList.map((job) => <JobItem key={job.id} job={job}></JobItem>);
 
   function addJob() {
     const newJobList: Job[] = [...jobList, {
@@ -49,11 +46,19 @@ export default function Home() {
       <p>
         <b>Email:</b> krhoden@calpoly.edu&emsp;
         <b>Phone number:</b> (559)-289-2505&emsp;
-        <b>Github:</b> http://github.com/Kenton227
+        <b>Github:</b> <Link href="http://github.com/Kenton227">http://github.com/Kenton227</Link>
       </p>
       <h2>Projects</h2>
       <ul className="list">
-        <li>Senior Citizen Jigsaw Puzzle Game</li>
+        <li>Banking Data Encryption/Decryption</li>
+        <li>Virtual World Game</li>
+        <li>Huffman Encoding Algorithm</li>
+      </ul>
+      <h2>Skills</h2>
+      <ul className="list">
+        <li>Unix</li>
+        <li>Object oriented programming</li>
+        <li>Binary exploitation</li>
       </ul>
       <div>
         <h2>Job List</h2>
@@ -62,8 +67,6 @@ export default function Home() {
         </ul>
         <button onClick={addJob}>Add Job</button>
       </div>
-      <h2>Skills</h2>
-      
     </div>
   );
 }
